@@ -49,7 +49,7 @@ python ColorPaletteExtractor.py
 
 ```bash
 ├── ColorPaletteExtractor.py               # فایل اصلی برنامه
-├── logo.png              # لوگو (اختیاری)
+├── logo.png              # لوگو
 ├── README.md             # مستندات
 └── requirements.txt      # وابستگی‌ها
 ```
