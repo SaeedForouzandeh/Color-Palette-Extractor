@@ -1,0 +1,34 @@
+name: Build and Release EXE
+
+on:
+  push:
+    tags:
+      - 'v*'  # فقط وقتی تگ‌ جدید (مثل v1.0.0) ایجاد بشه اجرا میشه
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build EXE with PyInstaller
+        run: pyinstaller --onefile --windowed ColorPaletteExtractor.py --icon=logo.ico
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
